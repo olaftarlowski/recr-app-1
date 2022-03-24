@@ -3,6 +3,7 @@ import api from "../../api/directories";
 import Card from "../../layout/Card";
 import styled from "styled-components";
 import SingleItem from "../SingleItem/SingleItem";
+import { useParams } from "react-router";
 
 const ItemsWrapper = styled.div`
   display: flex;
@@ -11,6 +12,10 @@ const ItemsWrapper = styled.div`
 `;
 
 const FullData = () => {
+  const param = useParams();
+  const idLink = param.directoryCode;
+  let fetchLink = idLink ? `/directories/${idLink}` : "/directories";
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(null);
   const [fullData, setFullData] = useState();
@@ -18,7 +23,7 @@ const FullData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get("/directories");
+        const response = await api.get(fetchLink);
         setFullData(response.data);
         setIsLoaded(true);
       } catch (err) {
@@ -34,7 +39,7 @@ const FullData = () => {
     };
 
     fetchData();
-  }, []);
+  }, [fetchLink]);
 
   console.log(fullData);
 
@@ -45,8 +50,10 @@ const FullData = () => {
   if (!isLoaded) {
     return <div>LOADING</div>;
   } else if (fullData && !isError) {
-    let directiories = fullData.directories.map((dirItem) => {
-      return <SingleItem key={dirItem.id} id={dirItem.id} name={dirItem.name} />;
+    let directories = fullData.directories.map((dirItem) => {
+      return (
+        <SingleItem key={dirItem.id} id={dirItem.id} name={dirItem.name} />
+      );
     });
     let files = fullData.files.map((fileItem) => {
       return (
@@ -60,7 +67,7 @@ const FullData = () => {
       <>
         <p>data api</p>
         <ItemsWrapper>
-          {directiories}
+          {directories}
           {files}
         </ItemsWrapper>
       </>
