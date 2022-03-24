@@ -8,10 +8,10 @@ function App() {
       <header className="App-header">
         <Routes>
           <Route path="/directories" exact element={<FullData />}></Route>
-          {/* <Route
+          <Route
             path="/directories/:directoryCode"
-            element={<SingleData></SingleData>}
-          ></Route> */}
+            element={<FullData></FullData>}
+          ></Route>
           <Route path="*" element={<Navigate to="/directories" />}></Route>
         </Routes>
       </header>

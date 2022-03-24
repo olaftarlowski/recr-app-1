@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../api/directories";
 import Card from "../../layout/Card";
 import styled from "styled-components";
+import SingleItem from "../SingleItem/SingleItem";
 
 const ItemsWrapper = styled.div`
   display: flex;
@@ -45,16 +46,11 @@ const FullData = () => {
     return <div>LOADING</div>;
   } else if (fullData && !isError) {
     let directiories = fullData.directories.map((dirItem) => {
-      return (
-        <Card>
-          <p>{dirItem.name}</p>
-          <p>{dirItem.id}</p>
-        </Card>
-      );
+      return <SingleItem key={dirItem.id} id={dirItem.id} name={dirItem.name} />;
     });
     let files = fullData.files.map((fileItem) => {
       return (
-        <Card>
+        <Card key={fileItem.id}>
           <p>{fileItem.name}</p>
           <p>{fileItem.id}</p>
         </Card>
