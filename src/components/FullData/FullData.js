@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import api from "../../api/directories";
+import Card from "../../layout/Card";
+import styled from "styled-components";
+
+const ItemsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1440px;
+`;
 
 const FullData = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -38,32 +46,28 @@ const FullData = () => {
   } else if (fullData && !isError) {
     let directiories = fullData.directories.map((dirItem) => {
       return (
-        <div
-          style={{ width: "100px", height: "100px", border: "1px solid red" }}
-        >
+        <Card>
           <p>{dirItem.name}</p>
           <p>{dirItem.id}</p>
-        </div>
+        </Card>
       );
     });
     let files = fullData.files.map((fileItem) => {
       return (
-        <div
-          style={{ width: "100px", height: "100px", border: "1px solid red" }}
-        >
+        <Card>
           <p>{fileItem.name}</p>
           <p>{fileItem.id}</p>
-        </div>
+        </Card>
       );
     });
     return (
-      <div>
-        <p>data z api</p>
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <>
+        <p>data api</p>
+        <ItemsWrapper>
           {directiories}
           {files}
-        </div>
-      </div>
+        </ItemsWrapper>
+      </>
     );
   } else {
     return <div>Bad Request</div>;
