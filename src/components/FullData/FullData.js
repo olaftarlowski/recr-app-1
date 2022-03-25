@@ -4,6 +4,7 @@ import Card from "../../layout/Card";
 import styled from "styled-components";
 import SingleItem from "../SingleItem/SingleItem";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 const ItemsWrapper = styled.div`
   display: flex;
@@ -52,15 +53,14 @@ const FullData = () => {
   } else if (fullData && !isError) {
     let directories = fullData.directories.map((dirItem) => {
       return (
-        <SingleItem key={dirItem.id} id={dirItem.id} name={dirItem.name} />
+        <Link to={`/directories/${dirItem.id}`}>
+          <SingleItem key={dirItem.id} id={dirItem.id} name={dirItem.name} />
+        </Link>
       );
     });
     let files = fullData.files.map((fileItem) => {
       return (
-        <Card key={fileItem.id}>
-          <p>{fileItem.name}</p>
-          <p>{fileItem.id}</p>
-        </Card>
+        <SingleItem key={fileItem.id} id={fileItem.id} name={fileItem.name} />
       );
     });
     return (
