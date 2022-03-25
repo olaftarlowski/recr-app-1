@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import api from "../../api/directories";
-import Card from "../../layout/Card";
 import styled from "styled-components";
 import SingleItem from "../SingleItem/SingleItem";
 import { useParams } from "react-router";
@@ -51,17 +50,15 @@ const FullData = () => {
   if (!isLoaded) {
     return <div>LOADING</div>;
   } else if (fullData && !isError) {
-    let directories = fullData.directories.map((dirItem) => {
+    let directories = fullData.directories.map((dirItem, index) => {
       return (
-        <Link to={`/directories/${dirItem.id}`}>
-          <SingleItem key={dirItem.id} id={dirItem.id} name={dirItem.name} />
+        <Link to={`/directories/${dirItem.id}`} key={index}>
+          <SingleItem id={dirItem.id} name={dirItem.name} />
         </Link>
       );
     });
-    let files = fullData.files.map((fileItem) => {
-      return (
-        <SingleItem key={fileItem.id} id={fileItem.id} name={fileItem.name} />
-      );
+    let files = fullData.files.map((fileItem, index) => {
+      return <SingleItem key={index} id={fileItem.id} name={fileItem.name} />;
     });
     return (
       <>
