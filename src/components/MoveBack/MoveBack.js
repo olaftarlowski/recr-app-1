@@ -29,7 +29,7 @@ const MoveBack = () => {
   return (
     <div>
       <Button onClick={moveBackHandler}>
-        <span class="material-icons">arrow_back</span>
+        <span className={"material-icons"}>arrow_back</span>
         <span>back</span>
       </Button>
     </div>
