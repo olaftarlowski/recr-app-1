@@ -10,7 +10,6 @@ const ItemsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   max-width: 1440px;
-  margin-top: 50px;
 
   p {
     margin: 0 auto;
@@ -46,8 +45,6 @@ const FullData = () => {
 
     fetchData();
   }, [fetchLink]);
-
-  // console.log(fullData);
 
   if (isError) {
     return <p>{isError.message}</p>;

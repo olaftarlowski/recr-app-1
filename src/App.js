@@ -1,7 +1,7 @@
 import FullData from "./components/FullData/FullData";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
-import MoveBack from "./components/MoveBack/MoveBack";
+import Breadcrumbs from "./components/Breadcrumb/Breadcrumb";
 
 const AppWrapper = styled.section`
   background-color: #282c34;
@@ -10,23 +10,19 @@ const AppWrapper = styled.section`
   flex-direction: column;
   font-size: 1.8em;
   text-align: center;
-  color: white;
+  color: #fff;
 `;
 
 function App() {
   return (
     <main>
       <AppWrapper>
+        <Breadcrumbs />
         <Routes>
           <Route path="/directories" exact element={<FullData />}></Route>
           <Route
             path="/directories/:directoryCode"
-            element={
-              <>
-                <MoveBack />
-                <FullData />
-              </>
-            }
+            element={<FullData />}
           ></Route>
           <Route path="*" element={<Navigate to="/directories" />}></Route>
         </Routes>
