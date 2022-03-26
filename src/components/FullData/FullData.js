@@ -10,7 +10,7 @@ const ItemsWrapper = styled.div`
   flex-wrap: wrap;
   max-width: 1440px;
   margin-top: 50px;
-  
+
   p {
     margin: 0 auto;
   }
