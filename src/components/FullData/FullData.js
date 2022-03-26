@@ -9,6 +9,11 @@ const ItemsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   max-width: 1440px;
+  margin-top: 50px;
+  
+  p {
+    margin: 0 auto;
+  }
 `;
 
 const FullData = () => {
@@ -41,14 +46,14 @@ const FullData = () => {
     fetchData();
   }, [fetchLink]);
 
-  console.log(fullData);
+  // console.log(fullData);
 
   if (isError) {
-    return <div>{isError.message}</div>;
+    return <p>{isError.message}</p>;
   }
 
   if (!isLoaded) {
-    return <div>LOADING</div>;
+    return <p>LOADING</p>;
   } else if (fullData && !isError) {
     let directories = fullData.directories.map((dirItem, index) => {
       return (
@@ -60,9 +65,11 @@ const FullData = () => {
     let files = fullData.files.map((fileItem, index) => {
       return <SingleItem key={index} id={fileItem.id} name={fileItem.name} />;
     });
+    if (directories.length === 0 && files.length === 0) {
+      directories = <p>No results found...</p>;
+    }
     return (
       <>
-        <p>data api</p>
         <ItemsWrapper>
           {directories}
           {files}

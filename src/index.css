@@ -17,3 +17,6 @@ code {
 .material-icons {
   font-size: 58px;
 }
+a {
+  text-decoration: none;
+}
