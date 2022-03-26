@@ -4,6 +4,7 @@ import styled from "styled-components";
 import SingleItem from "../SingleItem/SingleItem";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../../layout/LoadingSpinner";
 
 const ItemsWrapper = styled.div`
   display: flex;
@@ -53,7 +54,7 @@ const FullData = () => {
   }
 
   if (!isLoaded) {
-    return <p>LOADING</p>;
+    return <LoadingSpinner />;
   } else if (fullData && !isError) {
     let directories = fullData.directories.map((dirItem, index) => {
       return (
